@@ -10,7 +10,6 @@
         position: relative;
         width: 100%;
         padding-top: 56.25%; /* 16:9 Aspect Ratio */
-        background-color: red;
       }
       .responsive-iframe {
         position: absolute;
@@ -24,19 +23,21 @@
       }
     </style>
   
-  	<div id="form-data" class="container">Hello world</div>
+  	<div id="form-data" class="container"></div>
 	
   	<script type='text/javascript'>
       document.addEventListener('message', function(event) {
             handleMessage(event.data);
+            console.log("Document")
         }, false);
 
         window.addEventListener('message', function(event) {
             handleMessage(event.data);
+            console.log("Window")
         }, false);
 
         function handleMessage(data) {
-            console.log('Received message:', data);
+            //console.log('Received message:', data);
             if (data) {
                 let receivedData = data;
                 let html = `
