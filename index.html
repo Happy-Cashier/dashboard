@@ -27,18 +27,27 @@
   	<div id="form-data" class="container">Hello world</div>
 	
   	<script type='text/javascript'>
-      console.log('Hello!')
-    	window.onmessage = (event) => {
-        	console.log(event.data);
-            if (event.data) {
-           		let receivedData = event.data;
+      document.addEventListener('message', function(event) {
+            handleMessage(event.data);
+        }, false);
+
+        window.addEventListener('message', function(event) {
+            handleMessage(event.data);
+        }, false);
+
+        function handleMessage(data) {
+            console.log('Received message:', data);
+            if (data) {
+                let receivedData = data;
                 let html = `
-                <form id="form" action="https://embed.domo.com/embed/pages/86px3" method="post" > <input type="hidden" name="embedToken" value='${receivedData}'> </form>
-                `
+                <form id="form" action="https://embed.domo.com/embed/pages/86px3" method="post">
+                    <input type="hidden" name="embedToken" value='${receivedData}'>
+                </form>
+                `;
                 
                 document.getElementById('form-data').innerHTML = html;
                 document.getElementById('form').submit();
-           	}
+            }
         }
     </script>
 
